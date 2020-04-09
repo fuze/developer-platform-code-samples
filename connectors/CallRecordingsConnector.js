@@ -39,7 +39,25 @@ class CallRecordingsConnector {
             .withHeaders({'Authorization': 'Bearer ' + this.authToken})
             .withMethodGet()
             .send();
-        }
+    }
+
+    downloadCallRecPromise(recordingId, responseHandler) {
+        return this.httpClient
+            .withPath('/api/v1/call-recordings/' + recordingId + '/media')
+            .withHeaders({'Authorization': 'Bearer ' + this.authToken})
+            .withExpectStatus([307])
+            .withMethodGet()
+            .send()
+            .then(redirection => {
+                return httplease.builder()
+                    .withPath(redirection.headers.location)
+                    .withTimeout(5000)
+                    .withExpectStatus([200])
+                    .withMethodGet()
+                    .withResponseHandler(responseHandler)
+                    .send()
+            })
+    }
 }
 
 module.exports = CallRecordingsConnector;

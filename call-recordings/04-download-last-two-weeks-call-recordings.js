@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
-// GET ALL CALL RECORDINGS OF THE LAST 15 DAYS
+// DOWNLOAD ALL CALL RECORDINGS OF THE LAST 15 DAYS
 // ----------------------------------------------------------------------------
-// This sample code retrieves all call recordings available for your
+// This sample code retrieves all call recordings available on your
 // organization made over the last two weeks.
 
 
@@ -14,21 +14,27 @@ var twoWeeksAgo = new Date();
 twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // take 14 days from the date
 
 // ----------------------------------------------------------------------------
-// Dependencies (httplease and node-stringbuilder)
+// Dependencies (httplease and fs)
 // ----------------------------------------------------------------------------
-const StringBuilder = require('node-stringbuilder')
+var fs = require('fs')
 const httplease = require("httplease");
 const CallRecordingsConnector = require('../connectors/CallRecordingsConnector')
 
 var connector = new CallRecordingsConnector(config)
 
 // ----------------------------------------------------------------------------
-// Displays the recordingIds of recordings made over the last 14 days
+// Download recordings sequentially
 // ----------------------------------------------------------------------------
-function showCalls(calls) {
-  var listOfRecordingIds = new StringBuilder();
-  calls.forEach(cr => listOfRecordingIds.append(cr.recordingId).append(', '))
-  console.log(" Call recordings Ids: " + listOfRecordingIds.toString())
+function downloadCallRecordingss(calls) {
+  calls.reduce((p, cr) => p.then(_ => {
+        console.log(" Download call recording id: " + cr.recordingId)
+        return connector
+            .downloadCallRecPromise(cr.recordingId, (response) => response.pipe(fs.createWriteStream(cr.recordingId + ".wav")))
+            .catch(err => console.error("Failed to download call recording with id " + cr.recordingId + ": " + err.message))
+            .then(x => console.log(" Downloaded " + cr.recordingId))
+      }),
+      Promise.resolve()
+  )
 }
 
 // ----------------------------------------------------------------------------
@@ -76,7 +82,7 @@ function getCallRecordingsPromise(cursor) {
     .catch(bailOut)
     .then(pageOfCallRecs => {
       var filteredCallRecsFromPage = filterOnlyThoseAfterDate(pageOfCallRecs, twoWeeksAgo)
-      
+
       console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings and " + filteredCallRecsFromPage.length + " made since two weeks ago");
       filteredCallRecsFromPage.forEach(cr => callReqsToKeep.push(cr))
 
@@ -94,6 +100,6 @@ function getCallRecordingsPromise(cursor) {
 getCallRecordingsPromise(null)
   .then(callRecordings => {
     console.log("Found a total of " + callRecordings.length + " call recordings made over the last two weeks")
-    showCalls(callRecordings)
+    downloadCallRecordingss(callRecordings)
   })
 // ----------------------------------------------------------------------------
