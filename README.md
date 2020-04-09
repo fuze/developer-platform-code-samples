@@ -9,8 +9,9 @@ There are three external dependencies that need to be installed:
 * httplease
 * node-stringbuilder
 * sprintf-js
+* fs
 
-Install them running `npm install httplease node-stringbuilder sprintf-js`
+Install them running `npm install httplease node-stringbuilder sprintf-js fs`
 ## Sample code organization
 There's a file named `config.js` at the base directory of the code samples. You should edit this file to add
 your authentication token.
@@ -22,6 +23,7 @@ your authentication token.
  |  |  01-get-all-call-recordings.js
  |  |  02-get-last-two-weeks-call-recordings.js
  |  `  03-get-one-call-recording.js
+ |  `  04-download-last-two-weeks-call-recordings.js
  | [-] users
  |  |  01-get-all-users.js
  |  `  02-get-users-with-call-recordings-from-yesterday.js
