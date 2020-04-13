@@ -1,40 +1,55 @@
 // ----------------------------------------------------------------------------
-// DOWNLOAD ALL CALL RECORDINGS OF THE LAST 15 DAYS
+// DOWNLOAD ALL CALL RECORDINGS SAMPLE CODE
 // ----------------------------------------------------------------------------
-// This sample code retrieves all call recordings available on your
-// organization made over the last two weeks.
-
+// This sample code retrieves all call recordings available for your
+// organization.
+// The call recordings returned in the responses are only limited by the scope
+// of the authentication token.
 
 // ----------------------------------------------------------------------------
 // Configurations
 // ----------------------------------------------------------------------------
 var config = require('../config')
 
-var twoWeeksAgo = new Date();
-twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // take 14 days from the date
-
 // ----------------------------------------------------------------------------
-// Dependencies (httplease and fs)
+// Dependencies (httplease and node-stringbuilder)
 // ----------------------------------------------------------------------------
 var fs = require('fs')
+const StringBuilder = require('node-stringbuilder')
 const httplease = require("httplease");
 const CallRecordingsConnector = require('../connectors/CallRecordingsConnector')
-
 var connector = new CallRecordingsConnector(config)
+var pageCounter = 0;
+var callRecordings = []
 
 // ----------------------------------------------------------------------------
 // Download recordings sequentially
 // ----------------------------------------------------------------------------
-function downloadCallRecordingss(calls) {
+function downloadCallRecordings(calls) {
   calls.reduce((p, cr) => p.then(_ => {
+      var file = cr.recordingId + ".wav"
+      if (!fs.existsSync(file)) {
         console.log(" Download call recording id: " + cr.recordingId)
         return connector
-            .downloadCallRecPromise(cr.recordingId, (response) => response.pipe(fs.createWriteStream(cr.recordingId + ".wav")))
+            .downloadCallRecPromise(cr.recordingId, (response) => response.pipe(fs.createWriteStream(file)))
             .catch(err => console.error("Failed to download call recording with id " + cr.recordingId + ": " + err.message))
             .then(x => console.log(" Downloaded " + cr.recordingId))
-      }),
-      Promise.resolve()
+      } else {
+        console.log(" Download call recording id: " + cr.recordingId + " NOT needed, file already exists")
+        return Promise.resolve()
+      }
+    }),
+    Promise.resolve()
   )
+}
+
+// ----------------------------------------------------------------------------
+// add all call recording from a page of call recordings to the array
+// ----------------------------------------------------------------------------
+function keepRecordings(responseRecordingsList) {
+  responseRecordingsList.forEach(function (r) {
+    callRecordings.push(r)
+  })
 }
 
 // ----------------------------------------------------------------------------
@@ -48,48 +63,24 @@ function bailOut(err) {
     } else {
         console.log(err.message)
     }
-
     process.exit(1);
 }
 
 // ----------------------------------------------------------------------------
-// Filter: ignore call recordings made before "notBefore"
+// Recursively get pages of call recordings from the API.
+// This function returns a promise with all the call recording IDs.
 // ----------------------------------------------------------------------------
-function filterOnlyThoseAfterDate(pageOfCallRecs, notBefore) {
-  var filteredCallRecs = [];
-
-  pageOfCallRecs.data.forEach(function(callRec) {
-    var callDate = new Date(callRec.startedAt);
-    if (callDate > notBefore) {
-      filteredCallRecs.push(callRec);
-    }
-  });
-
-  return filteredCallRecs;
-}
-
-// ----------------------------------------------------------------------------
-// Recursively get call recordings from the API and keep those made over the
-// last two weeks. This function returns a promise.
-// ----------------------------------------------------------------------------
-var twoWeeksAgo = new Date();
-twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // take 14 days from the date
-var callReqsToKeep = []
-var pageCounter = 0
-
-function getCallRecordingsPromise(cursor) {
+function getTotalCallRecordingsPromise(cursor) {
   return connector.getAllCallRecsPromise(cursor)
     .catch(bailOut)
     .then(pageOfCallRecs => {
-      var filteredCallRecsFromPage = filterOnlyThoseAfterDate(pageOfCallRecs, twoWeeksAgo)
+      console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings");
+      keepRecordings(pageOfCallRecs.data)
 
-      console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings and " + filteredCallRecsFromPage.length + " made since two weeks ago");
-      filteredCallRecsFromPage.forEach(cr => callReqsToKeep.push(cr))
-
-      if (pageOfCallRecs.pagination.cursor != null && filteredCallRecsFromPage.length > 0) {
-        return getCallRecordingsPromise(pageOfCallRecs.pagination.cursor)
+      if (pageOfCallRecs.pagination.cursor != null) {
+        return getTotalCallRecordingsPromise(pageOfCallRecs.pagination.cursor)
       } else {
-        return Promise.resolve(callReqsToKeep)
+        return Promise.resolve(callRecordings)
       }
     })
 }
@@ -97,9 +88,10 @@ function getCallRecordingsPromise(cursor) {
 // ----------------------------------------------------------------------------
 // Main
 // ----------------------------------------------------------------------------
-getCallRecordingsPromise(null)
-  .then(callRecordings => {
-    console.log("Found a total of " + callRecordings.length + " call recordings made over the last two weeks")
-    downloadCallRecordingss(callRecordings)
+getTotalCallRecordingsPromise(null)
+  .then(allCallRecording => {
+    console.log("Found a total of " + allCallRecording.length + " call recordings, will now download audio")
+    downloadCallRecordings(allCallRecording)
   })
+
 // ----------------------------------------------------------------------------

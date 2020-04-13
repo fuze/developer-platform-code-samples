@@ -38,7 +38,8 @@ class CallRecordingsConnector {
             .withPath('/api/v1/call-recordings/' + recordingId)
             .withHeaders({'Authorization': 'Bearer ' + this.authToken})
             .withMethodGet()
-            .send();
+            .send()
+            .then(response => response.body);
     }
 
     downloadCallRecPromise(recordingId, responseHandler) {

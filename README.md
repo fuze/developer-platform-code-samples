@@ -22,8 +22,10 @@ your authentication token.
  | [-] call-recordings
  |  |  01-get-all-call-recordings.js
  |  |  02-get-last-two-weeks-call-recordings.js
- |  `  03-get-one-call-recording.js
- |  `  04-download-last-two-weeks-call-recordings.js
+ |  |  03-get-one-call-recording.js
+ |  |  04-download-all-call-recordings.js
+ |  |  05-download-last-two-weeks-call-recordings.js
+ |  `  06-download-one-call-recording.js
  | [-] users
  |  |  01-get-all-users.js
  |  `  02-get-users-with-call-recordings-from-yesterday.js

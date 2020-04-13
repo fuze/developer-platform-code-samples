@@ -11,15 +11,28 @@ var config = require('../config')
 // ----------------------------------------------------------------------------
 // Dependencies (httplease)
 // ----------------------------------------------------------------------------
+var fs = require("fs")
 const httplease = require("httplease");
 const CallRecordingsConnector = require('../connectors/CallRecordingsConnector')
 
 var connector = new CallRecordingsConnector(config)
 
 // ----------------------------------------------------------------------------
+// Download one call recording
 // ----------------------------------------------------------------------------
-function handleRecording(callRecording) {
-  console.log("\nCall recording metadata\n" + JSON.stringify(callRecording));
+function downloadCallRecording(cr) {
+
+  var file = cr.recordingId + ".wav"
+  if (!fs.existsSync(file)) {
+    console.log(" Download call recording id: " + cr.recordingId)
+    return connector
+        .downloadCallRecPromise(cr.recordingId, (response) => response.pipe(fs.createWriteStream(file)))
+        .catch(err => console.error("Failed to download call recording with id " + cr.recordingId + ": " + err.message))
+        .then(x => console.log(" Downloaded " + cr.recordingId))
+  } else {
+    console.log(" Download call recording id: " + cr.recordingId + " NOT needed, file already exists")
+    return Promise.resolve()
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -46,7 +59,7 @@ if (process.argv.length < 3) {
   connector.getCallRecPromise(myRecordingId)
       .catch(bailOut)
       .then(callRecordingBody => {
-        handleRecording(callRecordingBody.data)
+        downloadCallRecording(callRecordingBody.data)
       });
 }
 // ----------------------------------------------------------------------------
