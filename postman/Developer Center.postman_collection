@@ -1,0 +1,3446 @@
+{
+	"info": {
+		"_postman_id": "f9168175-1833-47ea-afad-e5c25bd56212",
+		"name": "Developer Center (2020-05-19)",
+		"description": "developer-api\n\nContact Support:\n Fuze",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "call-recordings",
+			"item": [
+				{
+					"name": "Get all call recordings.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/call-recordings",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"call-recordings"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "<string>",
+									"description": "Cursor for item pagination. See 'cursor' field from previous response.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "Number of items per page.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Get all call recordings for your organization. This endpoint is paginated and requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"response\": [\n  {\n   \"recordingId\": \"<string>\",\n   \"linkedId\": \"<string>\",\n   \"userId\": \"<string>\",\n   \"departmentId\": \"<string>\",\n   \"startedAt\": \"<dateTime>\",\n   \"endedAt\": \"<dateTime>\",\n   \"duration\": \"<long>\",\n   \"retainedUntil\": \"<dateTime>\"\n  },\n  {\n   \"recordingId\": \"<string>\",\n   \"linkedId\": \"<string>\",\n   \"userId\": \"<string>\",\n   \"departmentId\": \"<string>\",\n   \"startedAt\": \"<dateTime>\",\n   \"endedAt\": \"<dateTime>\",\n   \"duration\": \"<long>\",\n   \"retainedUntil\": \"<dateTime>\"\n  }\n ],\n \"pagination\": {\n  \"cursor\": \"<string>\",\n  \"limit\": \"<long>\"\n }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a call recording by id.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/call-recordings/:recording-id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"call-recordings",
+								":recording-id"
+							],
+							"variable": [
+								{
+									"id": "4a85f79d-7b1e-4525-a32c-a5a37fe1892c",
+									"key": "recording-id",
+									"value": "<string>",
+									"type": "string",
+									"description": "(Required) Call recording identifier."
+								}
+							]
+						},
+						"description": "Get a call recording by id. This endpoint requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not found, status code 13004",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"recordingId\": \"<string>\",\n \"linkedId\": \"<string>\",\n \"userId\": \"<string>\",\n \"departmentId\": \"<string>\",\n \"startedAt\": \"<dateTime>\",\n \"endedAt\": \"<dateTime>\",\n \"duration\": \"<long>\",\n \"retainedUntil\": \"<dateTime>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a call recording media by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/call-recordings/:recording-id/media",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"call-recordings",
+								":recording-id",
+								"media"
+							],
+							"variable": [
+								{
+									"id": "174a6e6e-8f24-49fc-ac62-1182d63a9939",
+									"key": "recording-id",
+									"value": "<string>",
+									"type": "string",
+									"description": "(Required) Call recording identifier."
+								}
+							]
+						},
+						"description": "Get a call recording media by id. This endpoint requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not found, status code 13004",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Temporary redirect.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Temporary Redirect (since HTTP/1.1)",
+							"code": 307,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/call-recordings/:recording-id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"call-recordings",
+										":recording-id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "recording-id"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "departments",
+			"item": [
+				{
+					"name": "List all departments.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/departments",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"departments"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "<string>",
+									"description": "Cursor for item pagination. See 'cursor' field from previous response.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "Number of items per page.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "List all departments. This endpoint is paginated and requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"response\": [\n  {\n   \"departmentId\": \"<long>\",\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"active\": false,\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\",\n   \"defaultDepartment\": false\n  },\n  {\n   \"departmentId\": \"<long>\",\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"active\": false,\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\",\n   \"defaultDepartment\": false\n  }\n ],\n \"pagination\": {\n  \"cursor\": \"<string>\",\n  \"limit\": \"<long>\"\n }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get one department details.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/departments/:department-id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"departments",
+								":department-id"
+							],
+							"variable": [
+								{
+									"id": "fc96b01b-f38d-4314-a3c1-4b80966a7b7b",
+									"key": "department-id",
+									"value": "<string>",
+									"type": "string",
+									"description": "(Required) Department identifier."
+								}
+							]
+						},
+						"description": "Get one department details. This endpoint requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not found, status code 13004",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"departmentId\": \"<long>\",\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"active\": false,\n \"createdOn\": \"<dateTime>\",\n \"lastModifiedOn\": \"<dateTime>\",\n \"defaultDepartment\": false\n}"
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/departments/:department-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"departments",
+										":department-id"
+									],
+									"variable": [
+										{
+											"key": "department-id"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "locations",
+			"item": [
+				{
+					"name": "List all the locations of your organization.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/locations",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "<string>",
+									"description": "Cursor for item pagination. See 'cursor' field from previous response.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "Number of items per page.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "List all the locations of your organization. This endpoint is paginated and requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"response\": [\n  {\n   \"locationId\": \"<long>\",\n   \"name\": \"<string>\",\n   \"locationCode\": \"<string>\",\n   \"organizationCode\": \"<string>\",\n   \"timeZone\": \"<string>\",\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\",\n   \"active\": false,\n   \"addressLine1\": \"<string>\",\n   \"addressLine2\": \"<string>\",\n   \"city\": \"<string>\",\n   \"state\": \"<string>\",\n   \"postalCode\": \"<string>\",\n   \"countryCode\": \"<string>\"\n  },\n  {\n   \"locationId\": \"<long>\",\n   \"name\": \"<string>\",\n   \"locationCode\": \"<string>\",\n   \"organizationCode\": \"<string>\",\n   \"timeZone\": \"<string>\",\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\",\n   \"active\": false,\n   \"addressLine1\": \"<string>\",\n   \"addressLine2\": \"<string>\",\n   \"city\": \"<string>\",\n   \"state\": \"<string>\",\n   \"postalCode\": \"<string>\",\n   \"countryCode\": \"<string>\"\n  }\n ],\n \"pagination\": {\n  \"cursor\": \"<string>\",\n  \"limit\": \"<long>\"\n }\n}"
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get one location details.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/locations/:location-id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations",
+								":location-id"
+							],
+							"variable": [
+								{
+									"id": "f0fc8552-a14f-48a7-95b2-063761667763",
+									"key": "location-id",
+									"value": "<string>",
+									"type": "string",
+									"description": "(Required) Location identifier."
+								}
+							]
+						},
+						"description": "Get one location details. This endpoint requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"locationId\": \"<long>\",\n \"name\": \"<string>\",\n \"locationCode\": \"<string>\",\n \"organizationCode\": \"<string>\",\n \"timeZone\": \"<string>\",\n \"createdOn\": \"<dateTime>\",\n \"lastModifiedOn\": \"<dateTime>\",\n \"active\": false,\n \"addressLine1\": \"<string>\",\n \"addressLine2\": \"<string>\",\n \"city\": \"<string>\",\n \"state\": \"<string>\",\n \"postalCode\": \"<string>\",\n \"countryCode\": \"<string>\"\n}"
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not found, status code 13004",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locations/:location-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locations",
+										":location-id"
+									],
+									"variable": [
+										{
+											"key": "location-id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "organizations",
+			"item": [
+				{
+					"name": "List all organizations.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/organizations",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organizations"
+							],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "<string>",
+									"description": "Cursor for item pagination. See 'cursor' field from previous response.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "Number of items per page.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "List all organizations. This endpoint is paginated and requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations?cursor=<string>&limit=100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"response\": [\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\",\n   \"code\": \"<string>\",\n   \"active\": false,\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\"\n  },\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\",\n   \"code\": \"<string>\",\n   \"active\": false,\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\"\n  }\n ],\n \"pagination\": {\n  \"cursor\": \"<string>\",\n  \"limit\": \"<long>\"\n }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get one organization details.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/organizations/:organization-code",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organizations",
+								":organization-code"
+							],
+							"variable": [
+								{
+									"id": "5e82c4ed-ce6d-413f-9573-a5cb88c6d0ff",
+									"key": "organization-code",
+									"value": "<string>",
+									"type": "string",
+									"description": "(Required) Organization code."
+								}
+							]
+						},
+						"description": "Get one organization details. This endpoint requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not found, status code 13004",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/organizations/:organization-code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"organizations",
+										":organization-code"
+									],
+									"variable": [
+										{
+											"key": "organization-code"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"<string>\",\n \"name\": \"<string>\",\n \"code\": \"<string>\",\n \"active\": false,\n \"createdOn\": \"<dateTime>\",\n \"lastModifiedOn\": \"<dateTime>\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "List all users of your organization.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/users",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "<string>",
+									"description": "Filter users by email.",
+									"disabled": true
+								},
+								{
+									"key": "userName",
+									"value": "<string>",
+									"description": "Filter users by their user name.",
+									"disabled": true
+								},
+								{
+									"key": "firstName",
+									"value": "<string>",
+									"description": "Filter users by their first name.",
+									"disabled": true
+								},
+								{
+									"key": "lastName",
+									"value": "<string>",
+									"description": "Filter users by their last name.",
+									"disabled": true
+								},
+								{
+									"key": "primaryPhoneNumber",
+									"value": "<string>",
+									"description": "Filter users by their phone number (in e.164 format).",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "Number of items per page.",
+									"disabled": true
+								},
+								{
+									"key": "cursor",
+									"value": "<string>",
+									"description": "Cursor for item pagination. See 'cursor' field from previous response.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "List all users of your organization. This endpoint is paginated and requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?email=<string>&userName=<string>&firstName=<string>&lastName=<string>&primaryPhoneNumber=<string>&limit=100&cursor=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "<string>"
+										},
+										{
+											"key": "userName",
+											"value": "<string>"
+										},
+										{
+											"key": "firstName",
+											"value": "<string>"
+										},
+										{
+											"key": "lastName",
+											"value": "<string>"
+										},
+										{
+											"key": "primaryPhoneNumber",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "cursor",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?email=<string>&userName=<string>&firstName=<string>&lastName=<string>&primaryPhoneNumber=<string>&limit=100&cursor=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "<string>"
+										},
+										{
+											"key": "userName",
+											"value": "<string>"
+										},
+										{
+											"key": "firstName",
+											"value": "<string>"
+										},
+										{
+											"key": "lastName",
+											"value": "<string>"
+										},
+										{
+											"key": "primaryPhoneNumber",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "cursor",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?email=<string>&userName=<string>&firstName=<string>&lastName=<string>&primaryPhoneNumber=<string>&limit=100&cursor=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "<string>"
+										},
+										{
+											"key": "userName",
+											"value": "<string>"
+										},
+										{
+											"key": "firstName",
+											"value": "<string>"
+										},
+										{
+											"key": "lastName",
+											"value": "<string>"
+										},
+										{
+											"key": "primaryPhoneNumber",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "cursor",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad request, status code 13003 or 13008",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?email=<string>&userName=<string>&firstName=<string>&lastName=<string>&primaryPhoneNumber=<string>&limit=100&cursor=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "<string>"
+										},
+										{
+											"key": "userName",
+											"value": "<string>"
+										},
+										{
+											"key": "firstName",
+											"value": "<string>"
+										},
+										{
+											"key": "lastName",
+											"value": "<string>"
+										},
+										{
+											"key": "primaryPhoneNumber",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "cursor",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?email=<string>&userName=<string>&firstName=<string>&lastName=<string>&primaryPhoneNumber=<string>&limit=100&cursor=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "<string>"
+										},
+										{
+											"key": "userName",
+											"value": "<string>"
+										},
+										{
+											"key": "firstName",
+											"value": "<string>"
+										},
+										{
+											"key": "lastName",
+											"value": "<string>"
+										},
+										{
+											"key": "primaryPhoneNumber",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "cursor",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?email=<string>&userName=<string>&firstName=<string>&lastName=<string>&primaryPhoneNumber=<string>&limit=100&cursor=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "<string>"
+										},
+										{
+											"key": "userName",
+											"value": "<string>"
+										},
+										{
+											"key": "firstName",
+											"value": "<string>"
+										},
+										{
+											"key": "lastName",
+											"value": "<string>"
+										},
+										{
+											"key": "primaryPhoneNumber",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "cursor",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"response\": [\n  {\n   \"userName\": \"<string>\",\n   \"email\": \"<string>\",\n   \"firstName\": \"<string>\",\n   \"lastName\": \"<string>\",\n   \"userId\": \"<long>\",\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\",\n   \"primaryPhoneNumber\": \"<string>\",\n   \"active\": false,\n   \"locationId\": \"<long>\",\n   \"departmentId\": \"<long>\",\n   \"organizationId\": \"<long>\",\n   \"organizationCode\": \"<string>\"\n  },\n  {\n   \"userName\": \"<string>\",\n   \"email\": \"<string>\",\n   \"firstName\": \"<string>\",\n   \"lastName\": \"<string>\",\n   \"userId\": \"<long>\",\n   \"createdOn\": \"<dateTime>\",\n   \"lastModifiedOn\": \"<dateTime>\",\n   \"primaryPhoneNumber\": \"<string>\",\n   \"active\": false,\n   \"locationId\": \"<long>\",\n   \"departmentId\": \"<long>\",\n   \"organizationId\": \"<long>\",\n   \"organizationCode\": \"<string>\"\n  }\n ],\n \"pagination\": {\n  \"cursor\": \"<string>\",\n  \"limit\": \"<long>\"\n }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get details of one user belonging to your organization.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/users/:user-id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":user-id"
+							],
+							"variable": [
+								{
+									"id": "30a7d94a-5f82-4520-9ed2-155ca947fea2",
+									"key": "user-id",
+									"value": "<string>",
+									"type": "string",
+									"description": "(Required) User identifier."
+								}
+							]
+						},
+						"description": "Get details of one user belonging to your organization. This endpoint requires an integration token for authentication."
+					},
+					"response": [
+						{
+							"name": "Bad request, status code 13003",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Ok, status code 0",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"userName\": \"<string>\",\n \"email\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"userId\": \"<long>\",\n \"createdOn\": \"<dateTime>\",\n \"lastModifiedOn\": \"<dateTime>\",\n \"primaryPhoneNumber\": \"<string>\",\n \"active\": false,\n \"locationId\": \"<long>\",\n \"departmentId\": \"<long>\",\n \"organizationId\": \"<long>\",\n \"organizationCode\": \"<string>\"\n}"
+						},
+						{
+							"name": "Not found, status code 13004",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal error, status code 13005! Should be a temporary problem. If it persists please contact Fuze support.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden, status code 13002",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized, status code 13000 or 13001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Too many requests, status code 13006",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:user-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":user-id"
+									],
+									"variable": [
+										{
+											"key": "user-id"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "Get a test response",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fuzeBearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Fuze-Origin",
+								"value": "Fuze Developer Center Postman Collection",
+								"type": "text"
+							},
+							{
+								"key": "FZ-TransactionId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://developer.fuze.com/api/v1/test",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"fuze",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"test"
+							]
+						},
+						"description": "This endpoint should be used as an application level ping, only meaning that the API is alive. You may also use it to check if the authentication token is valid."
+					},
+					"response": [
+						{
+							"name": "Ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/test",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"test"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c0a2959c-be14-4dc7-a0e3-f88b177cdc68",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f03db54e-6322-4d1f-acdf-192faa36dba6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "46acb901-199f-4d8e-8b4f-f77055d7d8c4",
+			"key": "baseUrl",
+			"value": "https://developer.fuze.com/api/v1",
+			"type": "string"
+		},
+		{
+			"id": "5159af46-2146-45d2-988c-a8ca68a6f17a",
+			"key": "fuzeBearerToken",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
