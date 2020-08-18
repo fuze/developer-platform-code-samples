@@ -24,7 +24,7 @@ function bailOut(err) {
             console.log("Not authorized, the api key in config.js seems invalid");
         } else if (err.response.statusCode == 403) {
            console.log("Forbidden, your token lacks the meetings_read permission");
-        } else {}
+        } else {
             console.log("HTTP error: " + err.response.statusCode);
             console.log(err.response.headers);
             console.log(err.response.body);
