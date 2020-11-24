@@ -10,8 +10,10 @@ There are external dependencies that need to be installed:
 * node-stringbuilder
 * sprintf-js
 * fs
+* readline-sync
+* p-map
 
-Install them running `npm install httplease node-stringbuilder sprintf-js fs`
+Install them running `npm install httplease node-stringbuilder sprintf-js fs readline-sync p-map`
 
 ## Configuration
 A file named `config.js` exists at the base directory of the code samples. You should edit this

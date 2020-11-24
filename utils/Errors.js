@@ -2,6 +2,11 @@ const httplease = require("httplease");
 
 class HttpErrorHandler {
     static bailOut(err, required_permission_name) {
+        showPrettyError(err, required_permission_name)
+        process.exit(1);
+    }
+
+    static showPrettyError(err, required_permission_name) {
         if (err instanceof httplease.errors.UnexpectedHttpResponseCodeError) {
             if (err.response.statusCode == 401) {
                 console.log("Not authorized, the api key in config.js seems invalid");
@@ -14,7 +19,6 @@ class HttpErrorHandler {
         } else {
             console.log(err.message);
         }
-        process.exit(1);
     }
 }
 

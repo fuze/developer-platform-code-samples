@@ -3,25 +3,34 @@ const httplease = require("httplease");
 class CallRecordingsConnector {
   constructor(config) {
      this.authToken = config.authToken;
+     this.fuzeApiBaseUrl = config.fuzeApiBaseUrl
+     this.httpTimeoutMillis = config.httpTimeoutMillis
      this.pageSize = 100;
+
      this.httpClient = httplease.builder()
-         .withBaseUrl(config.fuzeApiBaseUrl)
+         .withBaseUrl(this.fuzeApiBaseUrl)
          .withExpectStatus([200])
          .withBufferJsonResponseHandler()
-         .withTimeout(config.httpTimeoutMillis)
+         .withTimeout(this.httpTimeoutMillis)
          .withAgentOptions({keepAlive: true});
 
     }
 
     getAllCallRecsPromise() {
-        return getAllCallRecs(null)
+        return getAllCallRecs(null, null, null)
     }
 
-    getAllCallRecsPromise(nextCursor) {
+    getAllCallRecsPromise(nextCursor, optionalAfter, optionalBefore) {
         var query = {}
         query.limit = this.pageSize;
         if (nextCursor != null) {
             query.cursor = nextCursor
+        }
+        if (optionalAfter != null) {
+            query.after = optionalAfter
+        }
+        if (optionalBefore != null) {
+            query.before = optionalBefore
         }
 
         return this.httpClient
@@ -43,7 +52,14 @@ class CallRecordingsConnector {
     }
 
     downloadCallRecPromise(recordingId, responseHandler) {
-        return this.httpClient
+        var downloadHttpClient = httplease.builder()
+             .withBaseUrl(this.fuzeApiBaseUrl)
+             .withExpectStatus([200])
+             .withBufferJsonResponseHandler()
+             .withTimeout(this.httpTimeoutMillis)
+             .withAgentOptions({keepAlive: true});
+
+        return downloadHttpClient
             .withPath('/api/v1/call-recordings/' + recordingId + '/media')
             .withHeaders({'Authorization': 'Bearer ' + this.authToken})
             .withExpectStatus([307])
@@ -52,7 +68,7 @@ class CallRecordingsConnector {
             .then(redirection => {
                 return httplease.builder()
                     .withPath(redirection.headers.location)
-                    .withTimeout(5000)
+                    .withTimeout(this.httpTimeoutMillis)
                     .withExpectStatus([200])
                     .withMethodGet()
                     .withResponseHandler(responseHandler)
