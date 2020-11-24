@@ -61,7 +61,7 @@ function bailOut(err) {
 // This function returns a promise with all the call recording IDs.
 // ----------------------------------------------------------------------------
 function getTotalCallRecordingsPromise(cursor) {
-  return connector.getAllCallRecsPromise(cursor)
+  return connector.getAllCallRecsPromise(cursor, null, null)
     .catch(bailOut)
     .then(pageOfCallRecs => {
       console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings");

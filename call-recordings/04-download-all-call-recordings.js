@@ -26,19 +26,29 @@ var callRecordings = []
 // Download recordings sequentially
 // ----------------------------------------------------------------------------
 function downloadCallRecordings(calls) {
-  calls.reduce((p, cr) => p.then(_ => {
+  return calls.reduce((p, cr) => {
       var file = cr.recordingId + ".wav"
+
       if (!fs.existsSync(file)) {
-        console.log(" Download call recording id: " + cr.recordingId)
-        return connector
+        return p.then(() => {
+          console.log(" Download call recording id: " + cr.recordingId + " started at " + cr.startedAt)
+          return connector
             .downloadCallRecPromise(cr.recordingId, (response) => response.pipe(fs.createWriteStream(file)))
-            .catch(err => console.error("Failed to download call recording with id " + cr.recordingId + ": " + err.message))
-            .then(x => console.log(" Downloaded " + cr.recordingId))
+            .catch(err => {
+                console.error("Failed to download call recording with id " + cr.recordingId + ": " + err.message)
+                return cr.recordingId
+            })
+            .then(wrappedresponse => {
+              console.log(" Downloaded " + cr.recordingId)
+              return cr.recordingId;
+            })
+        })
       } else {
-        console.log(" Download call recording id: " + cr.recordingId + " NOT needed, file already exists")
-        return Promise.resolve()
+        return p.then(() => {
+            console.log(" Download call recording id: " + cr.recordingId + " NOT needed, file already exists");
+            return Promise.resolve()})
       }
-    }),
+    },
     Promise.resolve()
   )
 }
@@ -70,28 +80,44 @@ function bailOut(err) {
 // Recursively get pages of call recordings from the API.
 // This function returns a promise with all the call recording IDs.
 // ----------------------------------------------------------------------------
-function getTotalCallRecordingsPromise(cursor) {
-  return connector.getAllCallRecsPromise(cursor)
+function getTotalCallRecordingsPromise(cursor, optionalAfter, optionalBefore) {
+  return connector.getAllCallRecsPromise(cursor, optionalAfter, optionalBefore)
     .catch(bailOut)
     .then(pageOfCallRecs => {
       console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings");
-      keepRecordings(pageOfCallRecs.data)
 
-      if (pageOfCallRecs.pagination.cursor != null) {
-        return getTotalCallRecordingsPromise(pageOfCallRecs.pagination.cursor)
-      } else {
-        return Promise.resolve(callRecordings)
-      }
+      return downloadCallRecordings(pageOfCallRecs.data).then(() => pageOfCallRecs.pagination)
+      })
+      .then(pagination => {
+          if (pagination.cursor != null) {
+            return getTotalCallRecordingsPromise(pagination.cursor, optionalAfter, optionalBefore)
+          } else {
+            return Promise.resolve(callRecordings)
+          }
     })
 }
 
 // ----------------------------------------------------------------------------
 // Main
 // ----------------------------------------------------------------------------
-getTotalCallRecordingsPromise(null)
+console.log("04-download-all-call-recordings.js")
+console.log("Usage: node 04-download-all-call-recordings.js [afterDate] [beforeDate]")
+console.log("       Dates should be in RFC3339 format and are optional")
+
+optionalAfter = null
+optionalBefore = null
+
+if (process.argv.length > 2) {
+    optionalAfter = process.argv[2];
+    if (process.argv.length > 3) {
+        optionalBefore = process.argv[3];
+    }
+}
+
+getTotalCallRecordingsPromise(null, optionalAfter, optionalBefore)
   .then(allCallRecording => {
     console.log("Found a total of " + allCallRecording.length + " call recordings, will now download audio")
-    downloadCallRecordings(allCallRecording)
+    //downloadCallRecordings(allCallRecording)
   })
 
 // ----------------------------------------------------------------------------

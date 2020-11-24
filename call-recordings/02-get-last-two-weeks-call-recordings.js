@@ -10,9 +10,6 @@
 // ----------------------------------------------------------------------------
 var config = require('../config')
 
-var twoWeeksAgo = new Date();
-twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // take 14 days from the date
-
 // ----------------------------------------------------------------------------
 // Dependencies (httplease and node-stringbuilder)
 // ----------------------------------------------------------------------------
@@ -47,40 +44,25 @@ function bailOut(err) {
 }
 
 // ----------------------------------------------------------------------------
-// Filter: ignore call recordings made before "notBefore"
-// ----------------------------------------------------------------------------
-function filterOnlyThoseAfterDate(pageOfCallRecs, notBefore) {
-  var filteredCallRecs = [];
-
-  pageOfCallRecs.data.forEach(function(callRec) {
-    var callDate = new Date(callRec.startedAt);
-    if (callDate > notBefore) {
-      filteredCallRecs.push(callRec);
-    }
-  });
-
-  return filteredCallRecs;
-}
-
-// ----------------------------------------------------------------------------
 // Recursively get call recordings from the API and keep those made over the
 // last two weeks. This function returns a promise.
 // ----------------------------------------------------------------------------
 var twoWeeksAgo = new Date();
-twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // take 14 days from the date
+twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 1); // take 14 days from the date
+var twoWeeksAgoIsoDate = twoWeeksAgo.toISOString()
+
 var callReqsToKeep = []
 var pageCounter = 0
 
 function getCallRecordingsPromise(cursor) {
-  return connector.getAllCallRecsPromise(cursor)
+  return connector.getAllCallRecsPromise(cursor, twoWeeksAgoIsoDate, null)
     .catch(bailOut)
     .then(pageOfCallRecs => {
-      var filteredCallRecsFromPage = filterOnlyThoseAfterDate(pageOfCallRecs, twoWeeksAgo)
       
-      console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings and " + filteredCallRecsFromPage.length + " made since two weeks ago");
-      filteredCallRecsFromPage.forEach(cr => callReqsToKeep.push(cr))
+      console.log("\nPage " + (++pageCounter) + " with " + pageOfCallRecs.data.length + " call recordings and " + callReqsToKeep.length + " made since two weeks ago");
+      pageOfCallRecs.data.forEach(cr => callReqsToKeep.push(cr))
 
-      if (pageOfCallRecs.pagination.cursor != null && filteredCallRecsFromPage.length > 0) {
+      if (pageOfCallRecs.pagination.cursor != null) {
         return getCallRecordingsPromise(pageOfCallRecs.pagination.cursor)
       } else {
         return Promise.resolve(callReqsToKeep)
@@ -91,6 +73,8 @@ function getCallRecordingsPromise(cursor) {
 // ----------------------------------------------------------------------------
 // Main
 // ----------------------------------------------------------------------------
+console.log("Getting all call recordings made since " + twoWeeksAgoIsoDate)
+
 getCallRecordingsPromise(null)
   .then(callRecordings => {
     console.log("Found a total of " + callRecordings.length + " call recordings made over the last two weeks")
