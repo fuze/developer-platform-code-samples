@@ -2,7 +2,7 @@ const httplease = require("httplease");
 
 class HttpErrorHandler {
     static bailOut(err, required_permission_name) {
-        showPrettyError(err, required_permission_name)
+        HttpErrorHandler.showPrettyError(err, required_permission_name)
         process.exit(1);
     }
 
