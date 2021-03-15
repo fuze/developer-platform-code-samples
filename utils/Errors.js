@@ -12,9 +12,10 @@ class HttpErrorHandler {
                 console.log("Not authorized, the api key in config.js seems invalid");
             } else if (err.response.statusCode == 403) {
                 console.log("Forbidden, your token lacks the " + required_permission_name + " permission");
+                console.log(JSON.stringify(err.response.body, null, 2))
             } else {
                 console.log("HTTP error: " + err.response.statusCode);
-                console.log(err.response.body);
+                console.log(JSON.stringify(err.response.body, null, 2));
             }
         } else {
             console.log(err.message);
