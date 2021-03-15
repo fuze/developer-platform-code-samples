@@ -45,6 +45,26 @@ class UsersConnector {
                 return userResponse.body.data;
             });
         }
+
+    deprovisionUserPromise(userId, managerUserId, forwardingSku) {
+        var request = {}
+
+        if (managerUserId != null && forwardingSku != null) {
+            request.managerUserId = managerUserId
+            request.forwardingSku = forwardingSku
+        }
+
+        return this.httpClient
+            .withPath('/api/v1/users/' + userId + "/deprovision")
+            .withHeaders({'Authorization': 'Bearer ' + this.authToken, 'X-Long-Encoding' : 'string'})
+            .withMethodPost()
+            .withJsonBody(request)
+            .withExpectStatus([202])
+            .send()
+            .then(userResponse => {
+                return userResponse.body.data;
+            });
+    }
 }
 
 module.exports = UsersConnector;
