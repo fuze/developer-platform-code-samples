@@ -13,8 +13,13 @@ There are external dependencies that need to be installed:
 * readline-sync
 * p-map
 * readline-sync
+* express (1)
+* body-parser-bigint (1)
 
-Install them running `npm install httplease node-stringbuilder sprintf-js fs readline-sync p-map readline-sync`
+Notes: 
+(1): needed for `presence/09-presence-events-listener.js` only
+
+Install them running `npm install httplease node-stringbuilder sprintf-js fs readline-sync p-map readline-sync express body-parser-bigint`
 
 ## Configuration
 A file named `config.js` exists at the base directory of the code samples. You should edit this
