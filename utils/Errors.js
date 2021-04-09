@@ -21,6 +21,14 @@ class HttpErrorHandler {
             console.log(err.message);
         }
     }
+
+    static getHttpError(err) {
+        if (err instanceof httplease.errors.UnexpectedHttpResponseCodeError) {
+            return err.response.statusCode;
+        } else {
+            return null;
+        }
+    }
 }
 
 module.exports = HttpErrorHandler;
