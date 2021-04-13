@@ -13,6 +13,7 @@ var config = require('../config')
 // ----------------------------------------------------------------------------
 const sprintf = require('sprintf-js').sprintf
 const UsersConnector = require('../connectors/UsersConnector.js')
+const HttpErrorHandler = require('../utils/Errors.js')
 
 // ----------------------------------------------------------------------------
 // Recursively get users from the API, one page at a time.
