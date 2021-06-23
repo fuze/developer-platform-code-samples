@@ -1,4 +1,4 @@
-var readline = require("readline-sync");
+const readline = require("readline-sync");
 
 class Console {
 
@@ -7,7 +7,7 @@ class Console {
     }
 
     static getPositiveNumber(message) {
-        var text = null
+        let text = null
         do {
             text = readline.question(message + ": ")
 
@@ -22,9 +22,9 @@ class Console {
         if (optionalPrefix == null) {
             return this.getPositiveNumber(message)
         } else {
-            var text = null
-            var inputOk = false;
-            
+            let text = null
+            let inputOk = false;
+
             do {
                 text = readline.question(message + ": ")
 
@@ -36,25 +36,25 @@ class Console {
                         inputOk = true;
                     }
                 } else {
-                   if (!Console.isPositiveAndNumeric(text)) {
+                    if (!Console.isPositiveAndNumeric(text)) {
                         console.log("Value is invalid, please type a positive number")
                     } else {
                         inputOk = true;
                     }
                 }
             } while (!inputOk)
-            
+
             return text;
         }
-        
+
     }
 
     static getBoolean(message, defaultTrue) {
         if (defaultTrue) {
-            var response = readline.question(message + " (Y/n)? ")
+            let response = readline.question(message + " (Y/n)? ")
             return response === "n" || response === "N"
         } else {
-            var response = readline.question(message + " (y/N)? ")
+            let response = readline.question(message + " (y/N)? ")
             return response === "y" || response === "Y"
         }
     }
@@ -64,17 +64,17 @@ class Console {
     }
 
     static isPositiveAndNumeric(value) {
-            return /^\d+$/.test(value);
+        return /^\d+$/.test(value);
     }
 
     static getDate(message) {
-        var done = false
-        var date = null;
-        
+        let done = false
+        let date = null;
+
         do {
             date = this.getString(message)
             date = date.trim()
-            
+
             if (date != "" && date.match(/^\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}Z$/)) {
                 done = true
             } else if (date != "") {
@@ -85,8 +85,35 @@ class Console {
                 date = null
             }
         } while (!done)
-        
+
         return date
+    }
+
+    static getArrayFromCSVString(message, allowEmpty) {
+        let results = []
+
+        do {
+            let inputText = Console.getString(message);
+            inputText = inputText.trim()
+
+            if (inputText != "") {
+                let parts = inputText.split(",")
+
+                for (var i = 0; i < parts.length; i++) {
+                    let item = parts[i].trim()
+
+                    if (item != "") {
+                        results.push(item)
+                    }
+                }
+            }
+
+            if (!allowEmpty && results.length == 0) {
+                console.log("Empty not allowed, please type something")
+            }
+        } while (!allowEmpty && results.length == 0)
+
+        return results
     }
 }
 
