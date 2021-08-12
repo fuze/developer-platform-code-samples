@@ -1,0 +1,95 @@
+<!--
+----------------------------------------------------------------------------
+REPLACE AN AUDIO FILE SAMPLE CODE
+----------------------------------------------------------------------------
+This HTML file shows you how to replace the contents of an audio file 
+already on one the PBXs of your organization. 
+Supported audio files (at the time of writing this file) are:
+- wav
+- gsm
+- mp2
+- mp3
+- amr
+- flac
+- ogg
+
+To use this sample application, drag and drop it on your browser window.
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Audio file replace - Fuze code samples</title>
+    <script type="text/javascript" src="../config.js"></script>
+    <style>
+        .fuze-class {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fuze-class">
+        <img src="fuze-logo.png" width="64px" />
+        <h2>Audio file replace - Fuze code samples</h2>
+    </div>
+    <p>Using this very minimalistic HTML file you'll be able to replace the contents of an audio file previously uploaded to a PBX of your organization.<br /><br />
+        When is a replace operation useful: when you need to quickly change the contents of a greeting or another audio file, already assigned to call flows or queues, in a single operation.<br />
+        Note: The file name will not change on the PBX.<br /><br />
+        Remember to place your API key inside config.js before clicking the upload button or the request will fail.</p>
+    <hr />
+    <form id="formReplace" enctype="multipart/form-data">
+        <label>* File ID </label><input type="text" id="fileIdAjax" name="fileId" value="">
+        <p><label>* Audio file </label><input type="file" id="fileAjax" name="file"></p>
+        <p><button type="submit" , id="replaceButton">Replace</button></p>
+        <p id="status"></p>
+    </form>
+
+    <script>
+        // Uploading file with multipart/form-data to Fuze using an Ajax request
+
+        var myForm = document.getElementById('formReplace');
+        var myFile = document.getElementById('fileAjax');
+        var myFileId = document.getElementById('fileIdAjax');
+        var statusP = document.getElementById('status');
+
+        myForm.onsubmit = function (event) {
+            event.preventDefault();
+
+            statusP.innerHTML = 'Replacing...';
+
+            // Get the files from the form input and select only the first one from the array (we can only upload one file anyway)
+            var files = myFile.files;
+            var file = files[0];
+            
+            // Create a FormData object
+            var formData = new FormData();
+
+            // Add fields to the AJAX request
+            formData.append('file', file, file.name);
+
+            // Set up the request
+            var xhr = new XMLHttpRequest();
+
+            // Open the connection and add the api-key
+            xhr.open('PUT', config.fuzeApiBaseUrl + '/api/v1/audio-files/' + myFileId.value, true);
+            xhr.setRequestHeader('Authorization', 'Bearer ' + config.authToken);
+
+            // Set up a handler for when the task is complete
+            xhr.onload = function (e) {
+                if (xhr.status == 200) {
+                    statusP.innerHTML = 'Replace complete: ' + e.srcElement.response;
+                } else {
+                    statusP.innerHTML = 'Replace error ' + xhr.status + ": " + e.srcElement.response;
+                    console.log(e);
+                }
+            };
+
+            // Send to Fuze
+            xhr.send(formData);
+        }
+    </script>
+
+</body>
+
+</html>
