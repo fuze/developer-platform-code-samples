@@ -115,6 +115,16 @@ class Console {
 
         return results
     }
+
+    static trimToNull(str) {
+        if (str != null) {
+            let trimmed = str.trim();
+            if (trimmed != "") {
+                return trimmed;
+            }
+        } 
+        return null;
+    }
 }
 
 module.exports = Console;

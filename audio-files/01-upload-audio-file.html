@@ -1,0 +1,123 @@
+<!--
+----------------------------------------------------------------------------
+UPLOAD AN AUDIO FILE SAMPLE CODE
+----------------------------------------------------------------------------
+This HTML file shows you how to upload an audio files to one the PBXs 
+of your organization. 
+Supported audio files (at the time of writing this file) are:
+- wav
+- gsm
+- mp2
+- mp3
+- amr
+- flac
+- ogg
+
+To use this sample application, drag and drop it on your browser window.
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Audio file upload - Fuze code samples</title>
+    <script type="text/javascript" src="../config.js"></script>
+    <style>
+        .fuze-class {
+            display: flex;
+        }
+
+        #dPBXandFO {
+            display: flex;
+        }
+
+        #dPBX {
+            min-width: 300px;
+        }
+
+        #tooltip {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fuze-class">
+        <img src="fuze-logo.png" width="64px" />
+        <h2>Audio file upload - Fuze code samples</h2>
+    </div>
+    <p>Using this very minimalistic HTML file you'll be able to upload audio files to PBXs of your organization.<br />
+        Remember to place your API key inside config.js before clicking the upload button or the request will fail.</p>
+    <hr />
+    <form id="formUpload" enctype="multipart/form-data">
+        <div id="dPBXandFO">
+            <div id="dPBX">
+                <label>* PBX name </label><input type="text" id="pbxAjax" name="pbx" value="">
+            </div>
+            <div>
+                <label>Filename override (optional) </label><input type="text" id="filenameAjax" name="filenameOverride"
+                    onmouseover="document.getElementById('tooltip').style.display = 'block'"
+                    onmouseout="document.getElementById('tooltip').style.display = 'none'">
+                <span id="tooltip">
+                    This field is optional. You should only use it if you want to store the file on the PBX under a
+                    different name. Please remember to include the file extension.
+                </span>
+            </div>
+        </div>
+        <p><label>* Audio file </label><input type="file" id="fileAjax" name="file"></p>
+        <p><button type="submit" , id="uploadButton">Upload</button></p>
+        <p id="status"></p>
+    </form>
+
+    <script>
+        // Uploading file with multipart/form-data to Fuze using an Ajax request
+
+        var myForm = document.getElementById('formUpload');
+        var myFile = document.getElementById('fileAjax');
+        var myPbx = document.getElementById('pbxAjax');
+        var myFilenameOverride = document.getElementById('filenameAjax');
+        var statusP = document.getElementById('status');
+
+        myForm.onsubmit = function (event) {
+            event.preventDefault();
+
+            statusP.innerHTML = 'Uploading...';
+
+            // Get the files from the form input and select only the first one from the array (we can only upload one file anyway)
+            var files = myFile.files;
+            var file = files[0];
+            
+            // Create a FormData object
+            var formData = new FormData();
+
+            // Add fields to the AJAX request
+            formData.append('pbx', myPbx.value);
+            formData.append('file', file, file.name);
+            if (myFilenameOverride.value.trim() != "") {
+                formData.append('filenameOverride', myFilenameOverride.value.trim());
+            }
+
+            // Set up the request
+            var xhr = new XMLHttpRequest();
+
+            // Open the connection and add the api-key
+            xhr.open('POST', config.fuzeApiBaseUrl + '/api/v1/audio-files', true);
+            xhr.setRequestHeader('Authorization', 'Bearer ' + config.authToken);
+
+            // Set up a handler for when the task is complete
+            xhr.onload = function (e) {
+                if (xhr.status == 200) {
+                    statusP.innerHTML = 'Upload complete: ' + e.srcElement.response;
+                } else {
+                    statusP.innerHTML = 'Upload error ' + xhr.status + ": " + e.srcElement.response;
+                    console.log(e);
+                }
+            };
+
+            // Send to Fuze
+            xhr.send(formData);
+        }
+    </script>
+
+</body>
+
+</html>
