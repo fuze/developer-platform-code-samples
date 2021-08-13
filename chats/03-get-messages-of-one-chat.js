@@ -73,7 +73,7 @@ function getAllMessagesOfChatPromise(chatId, cursor, optionalSenderId, optionalA
       messagesCounter = messagesCounter + bodyWithPageOfMessages.data.length;
 
       if (bodyWithPageOfMessages.pagination.cursor != null) {
-        return getAllMessagesOfChatPromise(chatId, bodyWithPageOfMessages.pagination.cursor, optionalSenderId)
+        return getAllMessagesOfChatPromise(chatId, bodyWithPageOfMessages.pagination.cursor, optionalSenderId, optionalAfter, optionalBefore)
       } else {
         return Promise.resolve(messagesCounter)
       }
