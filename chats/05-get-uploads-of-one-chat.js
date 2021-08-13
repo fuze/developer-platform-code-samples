@@ -72,7 +72,7 @@ function getAllUploadsOfChatPromise(chatId, cursor, optionalAfter, optionalBefor
       messagesCounter = messagesCounter + bodyWithPageOfUploads.data.length;
 
       if (bodyWithPageOfUploads.pagination.cursor != null) {
-        return getAllUploadsOfChatPromise(chatId, bodyWithPageOfUploads.pagination.cursor)
+        return getAllUploadsOfChatPromise(chatId, bodyWithPageOfUploads.pagination.cursor, optionalAfter, optionalBefore)
       } else {
         return Promise.resolve(messagesCounter)
       }
